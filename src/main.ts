@@ -14,7 +14,13 @@ decodeInput.addEventListener("input", () => {
   const value = decodeInput.value
   if (isBase64(value)) {
     if (isUrlSafeBase64(value)) {
-      decodeOutput.innerHTML = atob(decode(value))
+      const decoded = atob(decode(value));
+      try {
+        console.log(JSON.parse(decoded))
+        decodeOutput.textContent = decoded;
+      } catch {
+        decodeOutput.textContent = decoded;
+      }
     } else {
       decodeOutput.innerHTML = "Base64 is not url safe"
     }
